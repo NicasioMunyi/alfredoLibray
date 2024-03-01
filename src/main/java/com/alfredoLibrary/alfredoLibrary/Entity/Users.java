@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.management.relation.Role;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,11 +20,14 @@ public class Users {
     @Column(name ="ID")
     private  long  id;
 
+    @Column(name ="username")
+    private String userName;
+
     @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
+    private Set<Roles> roles = new HashSet<>();
 
 
 }

@@ -1,8 +1,8 @@
 package com.alfredoLibrary.alfredoLibrary.helpers;
 
 import com.alfredoLibrary.alfredoLibrary.Entity.Roles;
+import com.alfredoLibrary.alfredoLibrary.Entity.Users;
 import org.apache.catalina.Role;
-import org.apache.catalina.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +18,12 @@ public class CustomUserDetails  implements UserDetails  {
     private  String password;
 
     Collection<? extends GrantedAuthority> authorities;
-    public CustomUserDetails(User userByname) {
-        this.username =userByname.getUsername();
+    public CustomUserDetails(Users userByname) {
+        this.username = userByname.getUserName();
         this.password =userByname.getPassword();
         List<GrantedAuthority> auths = new ArrayList<>();
 
-        for (Iterator<Role> it = userByname.getRoles(); it.hasNext(); ) {
+        for (Iterator<Role> it = (Iterator<Role>) userByname.getRoles(); it.hasNext(); ) {
             Roles role = (Roles) it.next();
             auths.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
 
